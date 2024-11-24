@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 
@@ -33,8 +32,6 @@ func main() {
 
 		cep := chi.URLParam(r, "cep")
 
-		fmt.Println(cep)
-
 		if cep == "" {
 			http.Error(w, "invalid zipcode", http.StatusUnprocessableEntity)
 			return
@@ -44,19 +41,13 @@ func main() {
 			return
 		}
 
-		fmt.Println("Estou aqui!")
-		fmt.Println(cep)
 		localidade, err := handlers.GetLocalidade(ctx, cep)
-		fmt.Println(localidade)
 		if err != nil {
-			fmt.Println("Erro aqui!")
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
 
 		encodedLocalidade := url.QueryEscape(localidade)
-
-		fmt.Println(encodedLocalidade)
 
 		currentWeather, err := handlers.GetTemperature(ctx, encodedLocalidade)
 		if err != nil {

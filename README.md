@@ -50,3 +50,23 @@ Basedo no cenário conhecido "Sistema de temperatura por CEP" denominado Serviç
 - O código-fonte completo da implementação.
 - Documentação explicando como rodar o projeto em ambiente dev.
 - Utilize docker/docker-compose para que possamos realizar os testes de sua aplicação.
+
+## Instruções de uso:
+
+### Execução local via Docker:
+
+```bash
+docker-compose up --build
+````
+
+### Visualização de traces - Zipkin
+
+Acesse http://localhost:9411
+
+### Portas
+
+| Serviço     | Porta |
+|-------------|-------|
+| servicea    | 8080  |
+| serviceb    | 8081  |
+| zipkin      | 9411  |

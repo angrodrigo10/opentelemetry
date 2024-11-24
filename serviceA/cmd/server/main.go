@@ -120,20 +120,16 @@ func getServiceB(ctx context.Context, url string) (Temperature, error) {
 func handleFunc(w http.ResponseWriter, r *http.Request) {
 	ctx, span := tracer.Start(r.Context(), "handleFunc")
 	defer span.End()
-	fmt.Println("Estou aqui 1")
+
 	cep, err := decodeZipcode(r.Body)
-	fmt.Println("Estou aqui 2")
-	fmt.Println(cep)
 	if err != nil {
 		http.Error(w, "invalid zipcode", http.StatusUnprocessableEntity)
 		return
 	}
-	fmt.Println("Estou aqui 3")
 
 	cepok := validateZipcode(cep.Cep)
-	fmt.Println(cepok)
-	fmt.Println("Estou aqui 4")
 	if cepok {
+
 		sbUrl := fmt.Sprintf("http://serviceb:8081/%v", cep.Cep)
 
 		temp, err := getServiceB(ctx, sbUrl)
