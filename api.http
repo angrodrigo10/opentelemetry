@@ -1,0 +1,26 @@
+# Testes Locais
+# O CEP é VÁLIDO. Deve retornar o código de status 200 e o corpo da resposta (Response Body) correspondente.
+POST http://localhost:8080/
+Content-Type: application/json
+
+{
+    "cep":"34012690"
+}
+
+###
+# O CEP é INVÁLIDO (formato incorreto). Deve retornar o código de status 422 e a mensagem 'invalid zipcode'.
+POST http://localhost:8080/
+
+Content-Type: application/json
+{
+    "cep":"340000001"
+}
+
+###
+# O CEP tem um formato válido, mas não foi encontrado. Deve retornar o código de status 404 e a mensagem 'can not find zipcode'.
+GET http://localhost:8080/
+
+Content-Type: application/json
+{
+    "cep":"34000000"
+}

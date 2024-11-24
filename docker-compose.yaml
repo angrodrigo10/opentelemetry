@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+
+  servicea:
+    build: 
+      context: ./serviceA
+      dockerfile: Dockerfile
+    image: servicea:latest
+    container_name: servicea
+    ports:
+      - "8080:8080"
+
+  serviceb:
+    build: 
+      context: ./serviceB
+      dockerfile: Dockerfile
+    image: serviceb:latest
+    container_name: serviceb
+    ports:
+      - "8081:8081"
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
